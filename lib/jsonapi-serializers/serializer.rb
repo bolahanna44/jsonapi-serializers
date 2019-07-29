@@ -332,7 +332,7 @@ module JSONAPI
         primary_data = serialize_primary(objects, passthrough_options)
       end
       result = {
-        'data' => primary_data.map { |piece| piece.dig(passthrough_options['attributes_key']) },
+        'data' => primary_data.map { |piece| piece.dig(passthrough_options[:attributes_key]) },
       }
       result['jsonapi'] = options[:jsonapi] if options[:jsonapi]
       result['metadata'] = options[:meta] if options[:meta]
