@@ -413,7 +413,7 @@ module JSONAPI
       jsonapi = serializer.jsonapi
       meta = serializer.meta
       data = {}
-      data[options[:attributes_key]] = attributes if !attributes.empty?
+      data[options[:attributes_key] || 'attributes'] = attributes if !attributes.empty?
       data['links'] = links if !links.empty?
       data['relationships'] = relationships if !relationships.empty?
       data['jsonapi'] = jsonapi if !jsonapi.nil?
