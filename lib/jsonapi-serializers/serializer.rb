@@ -332,7 +332,7 @@ module JSONAPI
         primary_data = serialize_primary(objects, passthrough_options)
       end
       result = {
-        'data' => primary_data,
+        'data' => primary_data
       }
       result['jsonapi'] = options[:jsonapi] if options[:jsonapi]
       result['metadata'] = options[:meta] if options[:meta]
@@ -412,13 +412,7 @@ module JSONAPI
       relationships = serializer.relationships
       jsonapi = serializer.jsonapi
       meta = serializer.meta
-      data = {}
-      data[options[:attributes_key]] = attributes if !attributes.empty?
-      data['links'] = links if !links.empty?
-      data['relationships'] = relationships if !relationships.empty?
-      data['jsonapi'] = jsonapi if !jsonapi.nil?
-      data['meta'] = meta if !meta.nil?
-      data
+      attributes.present? ? attributes : []
     end
     class << self; protected :serialize_primary; end
 
