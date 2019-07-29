@@ -289,7 +289,7 @@ module JSONAPI
 
       # An internal-only structure that is passed through serializers as they are created.
       passthrough_options = {
-        attribute_key: options[:attributes_key],
+        attributes_key: options[:attributes_key],
         context: options[:context],
         serializer: options[:serializer],
         namespace: options[:namespace],
