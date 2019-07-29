@@ -289,7 +289,7 @@ module JSONAPI
 
       # An internal-only structure that is passed through serializers as they are created.
       passthrough_options = {
-        attributes_key: options[:attributes_key],
+        attributes_key: options[:attributes_key] || 'attributes',
         context: options[:context],
         serializer: options[:serializer],
         namespace: options[:namespace],
@@ -332,7 +332,7 @@ module JSONAPI
         primary_data = serialize_primary(objects, passthrough_options)
       end
       result = {
-        'data' => primary_data
+        'data' => primary_data.map { |piece| piece.dig(passthrough_options['attributes_key']) },
       }
       result['jsonapi'] = options[:jsonapi] if options[:jsonapi]
       result['metadata'] = options[:meta] if options[:meta]
@@ -413,7 +413,7 @@ module JSONAPI
       jsonapi = serializer.jsonapi
       meta = serializer.meta
       data = {}
-      data[options[:attributes_key] || 'attributes'] = attributes if !attributes.empty?
+      data[options[:attributes_key]] = attributes if !attributes.empty?
       data['links'] = links if !links.empty?
       data['relationships'] = relationships if !relationships.empty?
       data['jsonapi'] = jsonapi if !jsonapi.nil?
