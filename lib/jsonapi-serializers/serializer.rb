@@ -332,8 +332,9 @@ module JSONAPI
         primary_data = serialize_primary(objects, passthrough_options)
       end
       result = {
-        'data' => primary_data
+        'data' => {}
       }
+      result['data'][passthrough_options[:attributes_key]] = primary_data
       result['jsonapi'] = options[:jsonapi] if options[:jsonapi]
       result['metadata'] = options[:meta] if options[:meta]
       result['links'] = options[:links] if options[:links]
